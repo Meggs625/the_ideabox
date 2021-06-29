@@ -24,6 +24,7 @@ cardDisplay.addEventListener('click', function(event) {
 function retrieveLocalStorage() {
     ideaList = JSON.parse(localStorage.getItem('data'));
     if (ideaList) {
+        ideaList.forEach(element => new Idea(element.title, element.body))
         renderIdeas();
     } else {
         ideaList = [];
@@ -33,40 +34,38 @@ function retrieveLocalStorage() {
 function verifyInput() {
     if (titleInput.value && bodyInput.value) {
         buttonSave.disabled = false;
-        buttonSave.classList.remove('no-button');
+        buttonSave.classList.remove('inactive');
     } else {
-        buttonSave.classList.add('no-button');
+        buttonSave.classList.add('inactive');
         buttonSave.disabled = true;
     }
 }
 
 function saveIdea(event) {
     event.preventDefault();
-    var testIdea = new Idea(titleInput.value, bodyInput.value);
-    ideaList.push(testIdea);
-    testIdea.saveToStorage();
+    let newIdea = new Idea(null, titleInput.value, bodyInput.value);
+    ideaList.push(newIdea);
+    newIdea.saveToStorage();
     renderIdeas();
 }
 
 function renderIdeas() {
     cardDisplay.innerHTML = ''
-    for (var i = 0; i < ideaList.length; i++) {
-        cardDisplay.innerHTML +=
-            `<article class="idea-box">
+    ideaList.forEach(element => cardDisplay.innerHTML +=
+        `<article class="idea-box">
         <header>
-          <img src="./assets/star.svg" class="star" alt="star" id="${ideaList[i].id}">
-          <img src="./assets/delete.svg" class="delete-icon" id="${ideaList[i].id}" alt="delete-icon">
+          <img src="./assets/star.svg" class="star" alt="star" id="${element.id}">
+          <img src="./assets/delete.svg" class="delete-icon" id="${element.id}" alt="delete-icon">
         </header>
         <div class="idea-body">
-          <h3>${ideaList[i].title}</h3>
-          <p class="body-text">${ideaList[i].body}</p>
+          <h3>${element.title}</h3>
+          <p class="body-text">${element.body}</p>
         </div>
         <footer>
           <img src="./assets/comment.svg" class="add-comment" alt="add-comment">
           <p class="comment">Comment</p>
         </footer>
-      </article>`
-    }
+      </article>`)
 
     titleInput.value = '';
     bodyInput.value = '';
@@ -76,8 +75,13 @@ function renderIdeas() {
 function deleteIdea(event) {
     if (event.target.className === 'delete-icon') {
         event.target.closest('article').remove();
+        const numId = Number(event.target.id);
+        const findIdea = ideaList.find(element => element.id === numId);
+        const deletedIdea = new Idea(findIdea.id, findIdea.title, findIdea.body, findIdea.star);
+        deletedIdea.deleteFromStorage();
     }
 }
+
 
 function favoriteIdea(event) {
     if (event.target.className === 'star') {
