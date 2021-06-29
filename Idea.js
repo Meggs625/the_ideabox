@@ -31,5 +31,13 @@ class Idea {
         this.saveToStorage();
 
     }
+    undoFavorite() {
+        for (let i = 0; i < ideaList.length; i++) {
+            if (ideaList[i].id === this.id) {
+                ideaList[i].star = false;
+            }
+        }
+        this.saveToStorage();
+    }
 
 }

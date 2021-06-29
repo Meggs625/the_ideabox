@@ -25,9 +25,7 @@ function retrieveLocalStorage() {
     ideaList = JSON.parse(localStorage.getItem('data'));
     if (ideaList) {
         ideaList.forEach(element => new Idea(element.id, element.title, element.body, element.star))
-        let favorites = ideaList.filter(element => element.star === true);
         renderIdeas();
-        renderFavoritedIdeas(favorites);
     } else {
         ideaList = [];
     }
@@ -53,8 +51,28 @@ function saveIdea(event) {
 
 
 function renderIdeas() {
+    let favorites = ideaList.filter(element => element.star === true);
+    let nonFavorites = ideaList.filter(element => element.star === false);
+    console.log(nonFavorites[0].title)
+
     cardDisplay.innerHTML = ''
-    ideaList.forEach(element => cardDisplay.innerHTML +=
+    favorites.forEach(element => cardDisplay.innerHTML +=
+
+        `<article class="idea-box">
+    <header>
+      <img src="./assets/star-active.svg" class="star" alt="star" id="${element.id}">
+      <img src="./assets/delete.svg" class="delete-icon" id="${element.id}" alt="delete-icon">
+    </header>
+    <div class="idea-body">
+      <h3>${element.title}</h3>
+      <p class="body-text">${element.body}</p>
+    </div>
+    <footer>
+      <img src="./assets/comment.svg" class="add-comment" alt="add-comment">
+      <p class="comment">Comment</p>
+    </footer>
+  </article>`)
+    nonFavorites.forEach(element => cardDisplay.innerHTML +=
         `<article class="idea-box">
         <header>
           <img src="./assets/star.svg" class="star" alt="star" id="${element.id}">
@@ -70,10 +88,6 @@ function renderIdeas() {
         </footer>
       </article>`)
 
-    let favorites = ideaList.filter(element => console.log(element.star));
-    console.log(favorites)
-    renderFavoritedIdeas(favorites);
-
     titleInput.value = '';
     bodyInput.value = '';
     verifyInput();
@@ -81,7 +95,7 @@ function renderIdeas() {
 
 function renderFavoritedIdeas(favorites) {
     cardDisplay.innerHTML = ''
-    ideaList.forEach(element => cardDisplay.innerHTML +=
+    favorites.forEach(element => cardDisplay.innerHTML +=
 
         `<article class="idea-box">
     <header>
@@ -110,15 +124,15 @@ function deleteIdea(event) {
 
 
 function favoriteIdea(event) {
+    let newFavIdea = identifyCurrentIdea(event);
     if (event.target.className === 'star') {
-        let newFavIdea = identifyCurrentIdea(event);
         newFavIdea.updateFavorite();
         event.target.src = './assets/star-active.svg';
         event.target.classList.add('active');
     } else if (event.target.className === 'star active') {
+        newFavIdea.undoFavorite();
         event.target.src = './assets/star.svg';
         event.target.classList.remove('active');
-
     }
 }
 
