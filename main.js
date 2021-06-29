@@ -1,15 +1,15 @@
-// document.querySelectors()
-var titleInput = document.querySelector('.title');
-var bodyInput = document.querySelector('.body');
-var buttonSave = document.querySelector('.save-button');
-var titleOutput = document.querySelector('h3');
-var cardDisplay = document.querySelector('.idea-display');
-var ideaInput = document.querySelector('.title-label');
-
 // global variables
+
+const titleInput = document.getElementById('title-input');
+const bodyInput = document.getElementById('body-input');
+const buttonSave = document.getElementById('save-btn');
+const titleOutput = document.querySelector('h3');
+const cardDisplay = document.getElementById('card-display');
+const ideaInput = document.getElementById('inputs');
+
 var ideaList;
 
-// event Listeners!
+// event Listeners
 window.addEventListener('load', retrieveLocalStorage);
 buttonSave.addEventListener('click', saveIdea);
 ideaInput.addEventListener('input', verifyInput);

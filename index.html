@@ -21,19 +21,19 @@
     </nav>
     <main>
         <form>
-            <div class="title-label">
+            <section class="title-label" id="inputs">
                 <label for="title">Title</label>
-                <input type="text" class="title">
+                <input type="text" class="title" id="title-input">
                 <label for="body">Body</label>
-                <input type="text" class="body">
-            </div>
-            <button class="save-button no-button" disabled>Save</button>
+                <input type="text" class="body" id="body-input">
+            </section>
+            <button class="save-button no-button" id="save-btn" disabled>Save</button>
             <section class="search-field">
                 <img class="magnifying-glass" src="./assets/search.svg" alt="magnifying-glass">
                 <input type="text" placeholder="Search ideas" class="search-box">
             </section>
         </form>
-        <section class="idea-display">
+        <section class="idea-display" id="card-display">
             <!-- Idea cards show here -->
         </section>
     </main>

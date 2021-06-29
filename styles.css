@@ -95,7 +95,6 @@ label {
     height: 20%;
     border: 2px solid #6d70b1;
     border-radius: 3px;
-    margin-bottom: 20px;
 }
 
 .body {
@@ -140,7 +139,7 @@ label {
 .magnifying-glass {
     background-color: #1f1f3d;
     height: 100%;
-    padding: 5px;
+    padding: 8px;
     /* border-top-left-radius: 3px;
     border-bottom-left-radius: 3px; */
     cursor: pointer;
