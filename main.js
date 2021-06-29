@@ -6,6 +6,8 @@ const buttonSave = document.getElementById('save-btn');
 const titleOutput = document.querySelector('h3');
 const cardDisplay = document.getElementById('card-display');
 const ideaInput = document.getElementById('inputs');
+const favoriteDisplay = document.getElementById('show-starred');
+const searchBar = document.getElementById('search-bar');
 
 var ideaList;
 
@@ -19,13 +21,15 @@ cardDisplay.addEventListener('click', function(event) {
 cardDisplay.addEventListener('click', function(event) {
     favoriteIdea(event)
 });
+favoriteDisplay.addEventListener('click', renderFavoritedIdeas);
+searchBar.addEventListener('input', searchIdeas);
 
 // Functions
 function retrieveLocalStorage() {
     ideaList = JSON.parse(localStorage.getItem('data'));
     if (ideaList) {
         ideaList.forEach(element => new Idea(element.id, element.title, element.body, element.star))
-        renderIdeas();
+        renderIdeas(ideaList);
     } else {
         ideaList = [];
     }
@@ -46,14 +50,14 @@ function saveIdea(event) {
     let newIdea = new Idea(null, titleInput.value, bodyInput.value);
     ideaList.push(newIdea);
     newIdea.saveToStorage();
-    renderIdeas();
+    renderIdeas(ideaList);
+    ß
 }
 
 
-function renderIdeas() {
-    let favorites = ideaList.filter(element => element.star === true);
-    let nonFavorites = ideaList.filter(element => element.star === false);
-    console.log(nonFavorites[0].title)
+function renderIdeas(ideas) {
+    let favorites = ideas.filter(element => element.star === true);
+    let nonFavorites = ideas.filter(element => element.star === false);
 
     cardDisplay.innerHTML = ''
     favorites.forEach(element => cardDisplay.innerHTML +=
@@ -93,11 +97,14 @@ function renderIdeas() {
     verifyInput();
 }
 
-function renderFavoritedIdeas(favorites) {
-    cardDisplay.innerHTML = ''
-    favorites.forEach(element => cardDisplay.innerHTML +=
+function renderFavoritedIdeas() {
+    let favorites = ideaList.filter(element => element.star === true);
+    switch (favoriteDisplay.innerHTML) {
+        case 'Show Starred Ideas':
+            cardDisplay.innerHTML = ''
+            favorites.forEach(element => cardDisplay.innerHTML +=
 
-        `<article class="idea-box">
+                `<article class="idea-box">
     <header>
       <img src="./assets/star-active.svg" class="star" alt="star" id="${element.id}">
       <img src="./assets/delete.svg" class="delete-icon" id="${element.id}" alt="delete-icon">
@@ -111,6 +118,13 @@ function renderFavoritedIdeas(favorites) {
       <p class="comment">Comment</p>
     </footer>
   </article>`)
+            favoriteDisplay.innerText = 'Show All Ideas';
+            break;
+        case 'Show All Ideas':
+            favoriteDisplay.innderText = 'Show Starred Ideas';
+            renderIdeas(ideaList);
+
+    }
 }
 
 
@@ -141,4 +155,11 @@ function identifyCurrentIdea(event) {
     let findIdea = ideaList.find(element => element.id === numId);
     let currentIdea = new Idea(findIdea.id, findIdea.title, findIdea.body, findIdea.star);
     return currentIdea;
+}
+
+function searchIdeas() {
+    let searchedValue = searchBar.value.toLowerCase();
+    let searchedIdeas = ideaList.filter(element => (element.body.toLowerCase().includes(searchedValue) || element.title.toLowerCase().includes(searchedValue)))
+    renderIdeas(searchedIdeas);
+
 }
