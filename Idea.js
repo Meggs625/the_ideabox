@@ -22,5 +22,14 @@ class Idea {
     }
 
 
-    updateIdea() {}
+    updateFavorite() {
+        for (let i = 0; i < ideaList.length; i++) {
+            if (ideaList[i].id === this.id) {
+                ideaList[i].star = true;
+            }
+        }
+        this.saveToStorage();
+
+    }
+
 }
