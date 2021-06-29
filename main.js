@@ -51,7 +51,6 @@ function saveIdea(event) {
     ideaList.push(newIdea);
     newIdea.saveToStorage();
     renderIdeas(ideaList);
-    ß
 }
 
 
@@ -76,6 +75,7 @@ function renderIdeas(ideas) {
       <p class="comment">Comment</p>
     </footer>
   </article>`)
+
     nonFavorites.forEach(element => cardDisplay.innerHTML +=
         `<article class="idea-box">
         <header>
