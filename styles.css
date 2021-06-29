@@ -21,7 +21,7 @@ nav {
     display: flex;
     flex-direction: column;
     width: 25.5%;
-    height: 1010px;
+    height: 100%;
 }
 
 h1 {
@@ -38,7 +38,7 @@ h1 {
 h2 {
     color: #bfbfdd;
     font-size: 16px;
-    padding-left: 15px;
+    padding-left: 28px;
     margin: 25px 0px 30px;
 }
 
@@ -54,10 +54,10 @@ h2 {
     padding: 6px 10px;
     font-weight: bold;
     border: 2px solid #50539e;
-    height: 45px;
-    width: 240px;
+    height: 100%;
+    width: 80%;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 1.75vh;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -65,20 +65,22 @@ h2 {
 main {
     width: 75%;
     background-color: #a9aad2;
-    height: 100vh;
+    height: 100%;
 }
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 400px;
+    height: 35%;
 }
 
 .title-label {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 40%;
+    height: 55%;
 }
 
 label {
@@ -89,22 +91,26 @@ label {
 }
 
 .title {
-    width: 375px;
-    height: 45px;
+    width: 100%;
+    height: 20%;
     border: 2px solid #6d70b1;
     border-radius: 3px;
+    margin-bottom: 20px;
 }
 
 .body {
-    width: 375px;
-    height: 90px;
+    width: 100%;
+    height: 40%;
     border: 2px solid #6d70b1;
     border-radius: 3px;
+    padding-top: 0;
+    padding-left: 0;
+    line-height: 1em;
 }
 
 .save-button {
-    width: 375px;
-    height: 45px;
+    width: 40%;
+    height: 13%;
     margin: 25px;
     background-color: #1f1f3d;
     color: #e9e9f3;
@@ -127,20 +133,22 @@ label {
     border: 2px solid #6d70b1;
     border-radius: 3px;
     cursor: pointer;
+    width: 40%;
+    height: 13%;
 }
 
 .magnifying-glass {
     background-color: #1f1f3d;
-    height: 45px;
+    height: 100%;
     padding: 5px;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    /* border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px; */
     cursor: pointer;
 }
 
 .search-box {
-    width: 330px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
     color: #1f1f3d;
     font-size: 15;
     padding-left: 5px;
@@ -148,7 +156,7 @@ label {
 
 .idea-display {
     background-color: #eaeaf4;
-    height: 610px;
+    height: 65%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
