@@ -120,9 +120,10 @@ function renderFavoritedIdeas() {
   </article>`)
             favoriteDisplay.innerText = 'Show All Ideas';
             break;
-        case 'Show All Ideas':
-            favoriteDisplay.innderText = 'Show Starred Ideas';
+        default:
+            favoriteDisplay.innerText = 'Show Starred Ideas';
             renderIdeas(ideaList);
+
 
     }
 }
