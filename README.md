@@ -1,5 +1,5 @@
 # The Ideabox 
-    A continuation of the original [Ideabox](https://github.com/Meggs625/ideabox).
+ A continuation of the original [Ideabox](https://github.com/Meggs625/ideabox).
 
 ## Contributors
 
